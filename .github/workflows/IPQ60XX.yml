@@ -2,8 +2,11 @@ name: IPQ60XX
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: 0 19 * * *
+    inputs:
+      ssh:
+        description: "SSH connection to Actions"
+        required: false
+        default: "true"
 
 env:
   REPO_URL: https://github.com/breeze303/openwrt-6.x.git
@@ -108,6 +111,13 @@ jobs:
       run: |
         [ -e files ] && mv files $OPENWRT_PATH/files
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE $OPENWRT_PATH/.config
+
+    - name: SSH connection to Actions
+      uses: P3TERX/ssh2actions@v1.0.0
+      if: (github.event.inputs.ssh == 'true' && github.event.inputs.ssh  != 'false') || contains(github.event.action, 'ssh')
+      env:
+        TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}      
 
     - name: Download DL Package(下载DL软件包)
       run: |
