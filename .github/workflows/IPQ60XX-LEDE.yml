@@ -88,12 +88,12 @@ jobs:
         ./scripts/feeds update -a
         ./scripts/feeds install -a
 
-    - name: Apply patches(安装补丁)   
-      run: |
-        cp $DIY_SCRIPT $OPENWRT_PATH
-        cd $OPENWRT_PATH
-        chmod +x $DIY_SCRIPT
-        $DIY_SCRIPT
+   # - name: Apply patches(安装补丁)   
+      #run: |
+        #cp $DIY_SCRIPT $OPENWRT_PATH
+        #cd $OPENWRT_PATH
+        #chmod +x $DIY_SCRIPT
+        #$DIY_SCRIPT
   
     - name: Load Custom Configuration(加载自定义配置)
       run: |
