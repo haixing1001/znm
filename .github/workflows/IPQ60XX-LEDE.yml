@@ -96,7 +96,7 @@ jobs:
     - name: Apply patches(安装补丁)   
       run: |
         cp $DIY_SCRIPT $OPENWRT_PATH
-        cd $OPENWRT_PATH
+        cd openwrt
         chmod +x $DIY_SCRIPT
         $GITHUB_WORKSPACE/$DIY_SCRIPT
     
